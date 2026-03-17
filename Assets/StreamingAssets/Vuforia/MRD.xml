@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="ARMarker_1" size="1.000000 0.669271" />
+    <ImageTarget name="ARMarker_5" size="1.000000 0.666667" />
+    <ImageTarget name="ARMarker_4" size="1.000000 0.748438" />
+    <ImageTarget name="ARMarker_3" size="1.000000 0.631250" />
+    <ImageTarget name="ARMarker_2" size="1.000000 0.692708" />
+  </Tracking>
+</QCARConfig>
