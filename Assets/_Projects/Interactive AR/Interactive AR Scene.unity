@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 1819289128}
   - component: {fileID: 1819289127}
   - component: {fileID: 1819289129}
+  - component: {fileID: 1819289130}
   m_Layer: 0
   m_Name: Battery
   m_TagString: Untagged
@@ -755,6 +756,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drainAmount: 1
   currentLevel: 50
+--- !u!114 &1819289130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819289122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8842b7cda7f16b46b49b951dee38368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reactionList:
+  - ActionType: 
+    OnActionEntered:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActionStayed:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1819289129}
+          m_TargetAssemblyTypeName: UniKL.Battery, Assembly-CSharp
+          m_MethodName: DrainBattery
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnActionExited:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
