@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace UniKL
 {
@@ -16,7 +15,17 @@ namespace UniKL
     [RequireComponent(typeof(Rigidbody))]
     public class ActionEmitter : MonoBehaviour, IAction
     {
+        [SerializeField] private Collider actionCollider;
+
         [SerializeField] private string actionType = "Electric";
+
+        void Awake()
+        {
+            if (actionCollider == null)
+            {
+                throw new Exception($"ActionEmitter {gameObject.name} has no Collider assigned!");
+            }
+        }
 
         void OnTriggerEnter(Collider other)
         {
@@ -45,10 +54,12 @@ namespace UniKL
                 };
 
                 reaction.ReceiveAction(payload);
-                // print($"{gameObject.name} SEND: {actionType}");
+
+                print($"{gameObject.name} SEND: {actionType}");
             }
         }
 
+        #region EDITOR ONLY
         void OnValidate()
         {
             if (gameObject.TryGetComponent(out Rigidbody rb))
@@ -57,10 +68,30 @@ namespace UniKL
                 rb.isKinematic = true;
             }
 
-            if (gameObject.TryGetComponent(out Collider collider))
+            if (gameObject.TryGetComponent(out actionCollider))
             {
-                collider.isTrigger = true;
+                actionCollider.isTrigger = true;
             }
         }
+
+        void OnDrawGizmos()
+        {
+            if (actionCollider != null)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.matrix = transform.localToWorldMatrix;
+
+                switch (actionCollider)
+                {
+                    case BoxCollider box:
+                        Gizmos.DrawWireCube(box.center, box.size);
+                        break;
+                    case SphereCollider sphere:
+                        Gizmos.DrawWireSphere(sphere.center, sphere.radius);
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace UniKL
 {
     public interface IReaction
