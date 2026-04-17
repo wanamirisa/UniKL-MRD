@@ -4,21 +4,16 @@ namespace UniKL
 {
     public class Bulb : MonoBehaviour
     {
-        [SerializeField] private float drainAmount = 1;
+        public float drainAmount = 1;
 
-        [SerializeField] private Color onColor = Color.white;
-        private Color offColor = Color.white;
 
-        private MeshRenderer meshRenderer = null;
-
-        void Awake()
-        {
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
+        [SerializeField] private MeshRenderer meshRenderer = null;
+        [SerializeField] private Color onColor = Color.yellow;
+        [SerializeField] private Color offColor = Color.white;
 
         void Start()
         {
-            offColor = meshRenderer.sharedMaterial.color;
+            LightOff();
         }
 
         private void SetMaterialColor(Color color)
@@ -31,11 +26,6 @@ namespace UniKL
         public void LightOn()
         {
             SetMaterialColor(onColor);
-        }
-
-        public void SendPower(ActionPayload payload)
-        {
-            // send power amount to battery
         }
 
         public void LightOff()

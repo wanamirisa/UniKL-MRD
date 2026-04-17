@@ -346,6 +346,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionCollider: {fileID: 404021927}
   actionType: Electric
+  sourceObject: {fileID: 0}
+  showDebugLogs: 0
+  showGizmos: 0
 --- !u!54 &404021929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -590,6 +593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bulb
       objectReference: {fileID: 0}
+    - target: {fileID: 2995148929849153040, guid: 598cdfaa0039b104fb5ede67f290b538, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 64450b737006d0249963356b4500d407, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -675,6 +682,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  showDebugLogs: 0
+  showGizmos: 0
 --- !u!23 &1371760494 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2995148929849153040, guid: 598cdfaa0039b104fb5ede67f290b538, type: 3}

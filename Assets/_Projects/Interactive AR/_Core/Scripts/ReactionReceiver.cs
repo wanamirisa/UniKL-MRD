@@ -53,11 +53,15 @@ namespace UniKL
                         break;
                 }
 
-                print($"{gameObject.name} RECEIVED: {reactionEvent.ActionType}");
+                if (showDebugLogs)
+                    Debug.Log($"[{payload.ActionState}] {gameObject.name} RECEIVED: {reactionEvent.ActionType}", gameObject);
             }
         }
 
         #region EDITOR ONLY
+        [SerializeField] private bool showDebugLogs = false;
+        [SerializeField] private bool showGizmos = true;
+
         void OnValidate()
         {
             if (gameObject.TryGetComponent(out reactionCollider))
@@ -68,6 +72,8 @@ namespace UniKL
 
         void OnDrawGizmos()
         {
+            if (showGizmos == false) return;
+
             if (reactionCollider != null)
             {
                 Gizmos.color = Color.green;

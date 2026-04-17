@@ -1,15 +1,17 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UniKL
 {
     public enum ActionState { Enter, Stay, Exit }
 
+    [Serializable]
     public class ActionPayload
     {
         public string ActionType = "Action";
         public GameObject Source = null;
-        public ActionState ActionState;
+        [HideInInspector] public ActionState ActionState;
     }
 
     [RequireComponent(typeof(Rigidbody))]
@@ -18,6 +20,10 @@ namespace UniKL
         [SerializeField] private Collider actionCollider;
 
         [SerializeField] private string actionType = "Electric";
+        [SerializeField] private GameObject sourceObject = null;
+
+        // Keep track of everything we are currently touching
+        private HashSet<GameObject> activeTargets = new HashSet<GameObject>();
 
         void Awake()
         {
@@ -27,39 +33,94 @@ namespace UniKL
             }
         }
 
+        void Start()
+        {
+            activeTargets ??= new();
+
+            if (sourceObject == null)
+            {
+                sourceObject = gameObject;
+            }
+        }
+
+        void OnDisable()
+        {
+            // When disabled, send Exit to everything we were touching
+            foreach (var target in activeTargets)
+            {
+                if (target != null)
+                {
+                    SendAction(target, ActionState.Exit);
+                }
+            }
+
+            activeTargets.Clear();
+        }
+
         void OnTriggerEnter(Collider other)
         {
+            if (IsSelf(other)) return;
+
+            activeTargets.Add(other.gameObject);
             SendAction(other.gameObject, ActionState.Enter);
         }
 
         void OnTriggerStay(Collider other)
         {
+            if (IsSelf(other)) return;
+
             SendAction(other.gameObject, ActionState.Stay);
         }
 
         void OnTriggerExit(Collider other)
         {
+            if (IsSelf(other)) return;
+
+            activeTargets.Remove(other.gameObject);
             SendAction(other.gameObject, ActionState.Exit);
+        }
+
+        private bool IsSelf(Collider other)
+        {
+            // 1. If it's literally this exact same GameObject
+            if (other.gameObject == gameObject) return true;
+
+            // 2. If you assigned the root Bulb to 'sourceObject', ignore all of its children (like the Reaction object)
+            if (sourceObject != null && other.transform.IsChildOf(sourceObject.transform)) return true;
+
+            // 3. If they share the exact same parent (e.g., they are siblings under the Bulb)
+            if (transform.parent != null && other.transform.parent == transform.parent) return true;
+
+            // 4. If one is a direct child/parent of the other
+            if (other.transform.IsChildOf(transform) || transform.IsChildOf(other.transform)) return true;
+
+            return false; // It is safe to interact with!
         }
 
         public void SendAction(GameObject target, ActionState actionState)
         {
             if (target.TryGetComponent(out IReaction reaction))
             {
+                // Create the payload
                 ActionPayload payload = new()
                 {
                     ActionType = actionType,
-                    Source = gameObject,
+                    Source = sourceObject,
                     ActionState = actionState,
                 };
 
+                // Send the payload to the target
                 reaction.ReceiveAction(payload);
 
-                print($"{gameObject.name} SEND: {actionType}");
+                if (showDebugLogs)
+                    Debug.Log($"[{actionState}] {payload.Source.name} SEND: {payload.ActionType}", payload.Source);
             }
         }
 
         #region EDITOR ONLY
+        [SerializeField] private bool showDebugLogs = false;
+        [SerializeField] private bool showGizmos = true;
+
         void OnValidate()
         {
             if (gameObject.TryGetComponent(out Rigidbody rb))
@@ -76,6 +137,8 @@ namespace UniKL
 
         void OnDrawGizmos()
         {
+            if (showGizmos == false) return;
+
             if (actionCollider != null)
             {
                 Gizmos.color = Color.yellow;
