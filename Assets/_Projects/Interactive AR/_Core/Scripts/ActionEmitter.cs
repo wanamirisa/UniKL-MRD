@@ -118,8 +118,10 @@ namespace UniKL
         }
 
         #region EDITOR ONLY
-        [SerializeField] private bool showDebugLogs = false;
-        [SerializeField] private bool showGizmos = true;
+        private bool showDebugLogs = false;
+        private bool showGizmos = true;
+
+        Color gizmosColor = new Color(1f, 0.5f, 0f);
 
         void OnValidate()
         {
@@ -141,7 +143,7 @@ namespace UniKL
 
             if (actionCollider != null)
             {
-                Gizmos.color = Color.yellow;
+                Gizmos.color = gizmosColor;
                 Gizmos.matrix = transform.localToWorldMatrix;
 
                 switch (actionCollider)

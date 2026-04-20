@@ -431,8 +431,6 @@ MonoBehaviour:
     OnActionExited:
       m_PersistentCalls:
         m_Calls: []
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!1 &549449241
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,8 +698,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!1001 &991954138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -859,8 +855,6 @@ MonoBehaviour:
     OnActionExited:
       m_PersistentCalls:
         m_Calls: []
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!1 &1344569642
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,8 +925,6 @@ MonoBehaviour:
   actionCollider: {fileID: 1344569644}
   actionType: Electric
   sourceObject: {fileID: 1362681737}
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!54 &1344569646
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1077,8 +1069,6 @@ MonoBehaviour:
   actionCollider: {fileID: 1477256113}
   actionType: Electric
   sourceObject: {fileID: 294381756}
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!54 &1477256115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1181,8 +1171,6 @@ MonoBehaviour:
   actionCollider: {fileID: 1768406888}
   actionType: Electric
   sourceObject: {fileID: 1920510121}
-  showDebugLogs: 0
-  showGizmos: 1
 --- !u!54 &1768406890
 Rigidbody:
   m_ObjectHideFlags: 0
