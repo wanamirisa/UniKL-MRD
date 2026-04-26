@@ -924,7 +924,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionCollider: {fileID: 1344569644}
   actionType: Electric
-  sourceObject: {fileID: 1362681737}
 --- !u!54 &1344569646
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1068,7 +1067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionCollider: {fileID: 1477256113}
   actionType: Electric
-  sourceObject: {fileID: 294381756}
 --- !u!54 &1477256115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1170,7 +1168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionCollider: {fileID: 1768406888}
   actionType: Electric
-  sourceObject: {fileID: 1920510121}
 --- !u!54 &1768406890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1224,7 +1221,7 @@ Transform:
   m_GameObject: {fileID: 1920510121}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7.23}
+  m_LocalPosition: {x: 0, y: 0, z: -6.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1253,10 +1250,34 @@ MonoBehaviour:
   currentLevel: 0
   OnBatteryDepleted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768406886}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBatteryFull:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768406886}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1001 &2855814450656479807
 PrefabInstance:
   m_ObjectHideFlags: 0

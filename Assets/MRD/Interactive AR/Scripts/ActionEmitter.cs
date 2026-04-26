@@ -19,8 +19,8 @@ namespace UniKL
     {
         [SerializeField] private Collider actionCollider;
 
-        [SerializeField] private string actionType = "Electric";
-        [SerializeField] private GameObject sourceObject = null;
+        [SerializeField] private string actionType = "None";
+        private GameObject sourceObject = null;
 
         // Keep track of everything we are currently touching
         private HashSet<GameObject> activeTargets = new HashSet<GameObject>();
@@ -37,9 +37,13 @@ namespace UniKL
         {
             activeTargets ??= new();
 
-            if (sourceObject == null)
+            if (transform.parent == null)
             {
                 sourceObject = gameObject;
+            }
+            else
+            {
+                sourceObject = transform.parent.gameObject;
             }
         }
 

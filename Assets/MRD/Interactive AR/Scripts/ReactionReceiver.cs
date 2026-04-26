@@ -10,7 +10,7 @@ namespace UniKL
     [Serializable]
     public class ReactionEvent
     {
-        public string ActionType = "Action";
+        public string ActionType = "None";
 
         [Space(10)]
 
